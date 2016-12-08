@@ -12,6 +12,7 @@ namespace XamarinAdvent2016
         public MainPage()
         {
             InitializeComponent();
+            DependencyService.Get<IMobileEngagement>().StartActivity("MainPage");
         }
     }
 }

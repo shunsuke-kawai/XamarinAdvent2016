@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (c) Microsoft Corporation. All rights reserved.
+-->
+<engagement>
+	<agent>
+		<!-- テスト用 Mobile Engagement Connection String -->
+		<connectionString>Endpoint=XamarinAdvent2016.device.mobileengagement.windows.net;SdkKey=*****;AppId=*****</connectionString>
+
+		<!-- 本番用 Mobile Engagement Connection String --><!--		<connectionString>Endpoint=TechSummitMEApp.device.mobileengagement.windows.net;SdkKey=8b264938bda92b6c9b576356406b529f;AppId=cut0004745</connectionString>-->
+
+		<!-- [Optional] Indicate whether the agent have to report crash or not. -->
+		<reportCrash>true</reportCrash>
+	</agent>
+	<reach>
+		<!-- [Optional] Indicate whether the native push (WNS) is activated or not. -->
+		<enableNativePush>true</enableNativePush>
+	</reach>
+</engagement>

@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using Microsoft.Azure.Engagement;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace XamarinAdvent2016.UWP
@@ -39,13 +30,8 @@ namespace XamarinAdvent2016.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
+            //MobileEngagementとの接続初期化
+            InitEngagement(e);
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -102,6 +88,18 @@ namespace XamarinAdvent2016.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        
+        protected override void OnActivated(IActivatedEventArgs e)
+        {
+            InitEngagement(e);
+        }
+
+        private void InitEngagement(IActivatedEventArgs e)
+        {
+            EngagementAgent.Instance.Init(e);
+            EngagementReach.Instance.Init(e);
         }
     }
 }

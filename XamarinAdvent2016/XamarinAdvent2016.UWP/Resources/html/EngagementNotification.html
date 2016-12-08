@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) Microsoft Corporation. All rights reserved.
+-->
+<html>
+<head>
+  <!-- The css property @-ms-viewport is not reliable on UWP webview (Edge), use the meta-tag instead. -->
+  <meta name="viewport" content="width=device-width"/>
+  <style id="engagement_style" type='text/css'>
+    html 
+    {
+      /* Prevent zooming. */
+      -ms-content-zooming: none;
+    }
+
+    #engagement_notification_area 
+    {
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      font-family: 'Yu Gothic UI';
+      visibility: visible;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.714);
+      opacity: 1;
+      color: white;
+      display: table;
+      z-index: 1;
+    }
+
+    #engagement_notification_area > div 
+    {
+      display: table-cell;
+      vertical-align: middle;
+      height: 100%;
+    }
+
+    #engagement_notification_close_image 
+    {
+      height: 35px;
+      width: 35px;
+      background-color: #494949;
+    }
+
+    #engagement_notification_close 
+    {
+      cursor: pointer;
+      position: fixed;
+      right: 5px;
+      top: 13px;
+      z-index: 999;
+    }
+
+    #engagement_action_area 
+    {
+      cursor: pointer;
+      position: fixed;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      right: 35px;
+      z-index: 888;
+      left: 0;
+    }
+
+    #engagement_action_area > div 
+    {
+      position: absolute;
+      display: table-cell;
+      height: 100%;
+      white-space: normal;
+    }
+
+    #engagement_less_visible 
+    {
+      position: absolute;
+      display: table;
+      left: 10px;
+      top: 5px;
+      right: 0;
+    }
+
+    #engagement_less_visible > div
+    {
+      position: absolute;
+      display: table-cell;
+      height: 100%;
+      text-align: left;
+    }
+
+    #content 
+    {
+      display: table-column;
+      height: 100%;
+      z-index: 555;
+    }
+
+    #content > div 
+    {
+      display: table-row;
+      position: relative;
+      float: left;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    #engagement_notification_title 
+    {
+      z-index: 444;
+      font-size: 1.2em;
+      font-weight: bold;
+      overflow: hidden;
+      white-space:   normal;
+      text-wrap:none;
+      height: 20px;
+      top: 5px;
+      margin: 0;
+    }
+
+    #engagement_notification_message 
+    {
+      z-index: 333;
+      font-size: 1em;
+      overflow: hidden;
+      -ms-word-wrap: normal;
+      height: 35px;
+      margin: 0;
+    }
+
+    #engagement_notification_image 
+    {
+      width: 0px;
+      height: 0px;
+      text-align: right;
+      background-color: #494949;
+      z-index: 666;
+    }
+
+    #engagement_notification_image_display 
+    {
+      width: 0px;
+      height: 0px;
+    }
+  </style>
+  <script>
+    window.onload = function ()
+    { 
+      /* Fix viewport on mobile devices only. The viewport meta tag is not working on WP 8.1 webview (IE) */
+      if (navigator.userAgent.match(/IEMobile/i))
+      {
+        document.getElementById('engagement_style').innerHTML += '@-ms-viewport{width: device-width}';
+      }
+    }
+
+    window.onresize = function truncate()
+    {
+      var img = new Image();
+      img.src = document.getElementById('engagement_notification_image_display').src;
+      var result = img.width + 10 + 'px';
+      document.getElementById('content').style.right = result
+      document.getElementById('content').style.left = '0px';
+    }
+  </script>
+  <title></title>
+</head>
+<body>
+  <div id='engagement_notification_area'>
+    <div id='engagement_action_area'>
+      <div id="engagement_less_visible">
+        <div id='content'>
+          <div id='engagement_notification_title'></div>
+
+          <div id='engagement_notification_message'></div>
+        </div>
+        <div id='engagement_notification_image'>
+          <img id='engagement_notification_image_display' alt='' src='' />
+        </div>
+      </div>
+    </div>
+    <div id='engagement_notification_close'>
+      <img id='engagement_notification_close_image' alt='' src='../images/engagementIconClose.png' />
+    </div>
+  </div>
+</body>
+</html>
